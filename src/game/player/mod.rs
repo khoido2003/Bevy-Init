@@ -29,7 +29,12 @@ impl Plugin for PlayerPlugin {
                     .run_if(in_state(AppState::Game))
                     .run_if(in_state(SimulationState::Running)),
             )
-            .add_system(confine_player_movement.in_set(ConfinementSystem))
+            .add_system(
+                confine_player_movement
+                    .in_set(ConfinementSystem)
+                    .run_if(in_state(AppState::Game))
+                    .run_if(in_state(SimulationState::Running)),
+            )
             .add_system(confine_player_movement)
             //.add_system(enemy_hit_player)
             //.add_system(player_hit_star)

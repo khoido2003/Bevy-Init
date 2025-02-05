@@ -2,6 +2,14 @@ use bevy::prelude::*;
 
 use super::SimulationState;
 
+pub fn pause_simualation(mut simulation_state_next_state: ResMut<NextState<SimulationState>>) {
+    simulation_state_next_state.set(SimulationState::Paused);
+}
+
+pub fn resume_simualation(mut simulation_state_next_state: ResMut<NextState<SimulationState>>) {
+    simulation_state_next_state.set(SimulationState::Running);
+}
+
 pub fn toggle_simualation(
     mut commands: Commands,
     keyboard_input: Res<Input<KeyCode>>,
