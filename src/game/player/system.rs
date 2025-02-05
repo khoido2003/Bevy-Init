@@ -2,12 +2,12 @@ use bevy::{prelude::*, window::PrimaryWindow};
 
 use crate::events::*;
 
-use crate::enemy::component::*;
-use crate::enemy::system::*;
-use crate::player::component::*;
-use crate::score::resource::*;
-use crate::star::component::*;
-use crate::star::system::*;
+use crate::game::enemy::component::*;
+use crate::game::enemy::system::*;
+use crate::game::player::component::*;
+use crate::game::score::resource::*;
+use crate::game::star::component::*;
+use crate::game::star::system::*;
 
 pub const PLAYER_SIZE: f32 = 128.0;
 pub const PLAYER_SPEED: f32 = 500.0;
@@ -153,5 +153,11 @@ pub fn player_hit_star(
                 commands.entity(star_entity).despawn();
             }
         }
+    }
+}
+
+pub fn despawn_player(mut commands: Commands, player_query: Query<Entity, With<Player>>) {
+    if let Ok(player_entity) = player_query.get_single() {
+        commands.entity(player_entity).despawn();
     }
 }
